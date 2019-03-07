@@ -7,6 +7,9 @@
 # Only exists if Bazel was run
 /bazel-out
 
+#otros
+.gitignore
+
 # dependencies
 /node_modules
 
