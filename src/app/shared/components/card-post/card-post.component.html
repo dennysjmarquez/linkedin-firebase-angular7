@@ -1,0 +1,10 @@
+<div class="share-box__wrapper Elevation-2dp">
+
+  <div class="feed-shared-actor">
+    <strong>Dennys</strong>
+  </div>
+
+  <div class="feed-shared-body">{{(item.fecha | date: 'MMMM d, y - h:m:s a') | titlecase }}</div>
+  <div class="feed-shared-body" [innerHTML]="item.content"></div>
+
+</div>

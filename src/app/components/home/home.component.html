@@ -1,0 +1,67 @@
+<div class="container pt-5 w1 animated fadeIn fast">
+  <div class="row three-column">
+
+    <!--Sidebar  izquierdo-->
+    <div class="left-rail">
+
+      <div class="left-rail-container profile-rail-card">
+        <div class="feed-identity-module__member-bg-image profile-rail-card__member-bg-image">
+        </div>
+        <img class="lazy-image loaded feed-identity-module__member-photo profile-rail-card__member-photo EntityPhoto-circle-5"
+             alt="Dennys Jose Marquez Reyes"
+             src="../../../assets/img/foto1.jpg" width="64" height="64">
+
+      </div>
+
+    </div>
+
+    <!--Centro Post-->
+    <div class="core-rail">
+
+      <div class="share-box__wrapper Elevation-2dp content-box-post">
+        <form novalidate (ngSubmit)="addPost(forma)" #forma="ngForm" class="d-flex form-1">
+          <div class="content-box d-flex">
+            <textarea
+              [(ngModel)]="post.content" placeholder="Comienza una publicación" name="postcontent" class="content-texta" required=""></textarea>
+          </div>
+          <div class="share-box__footer d-flex">
+            <button class="btn btn-color-1 btn-primary ml-auto btn-sm" type="submit" [disabled]="forma.invalid">Publicar</button>
+          </div>
+        </form>
+      </div>
+      <hr>
+
+      <div class="emberPost">
+
+        <app-card-post *ngFor="let item of listPost" [item]="item"></app-card-post>
+
+      </div>
+
+    </div>
+
+    <!--Sidebar Derecho-->
+    <div class="right-rail">
+
+      <div class="right-rail-container right-rail-card" data-sticky-top="54" data-sticky-margin-top="12" >
+
+        Saludos, mi nombre es:
+        <br><br>
+        <strong>Dennys José Márquez Reyes y este es mi Examen</strong>
+        <br><br>
+        <p>Esta App carga la mayoría de la información de una Db en Firebase.</p>
+        <p>Se puede publicar un Post y ver los publicados el botón aparece desatibado hasta que se comience a escribir en la caja de texto,
+          si se borra e texto se  vuelve a desactivar este campo es necesario para eniar el Post.</p>
+        <p>El buscador esta desactivado aun no sé cómo buscar coincidencias en un valor de un Key en Firebase</p>
+
+        <hr>
+
+        <strong>Para esta App use:</strong>
+        <br><br>
+        <p>Directivas, Pipes, interfaces, rutas y rutas hijas, Servicios</p>
+
+      </div>
+
+    </div>
+
+    </div>
+</div>

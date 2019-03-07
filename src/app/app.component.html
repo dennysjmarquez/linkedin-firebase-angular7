@@ -1,0 +1,4 @@
+<app-navbar></app-navbar>
+<router-outlet></router-outlet>
+<app-home *ngIf="homeShow"></app-home>
+<div id="loader" *ngIf="utilitesService.loader"></div>

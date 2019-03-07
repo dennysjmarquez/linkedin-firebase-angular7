@@ -1,0 +1,99 @@
+<div class="container pt-5 pb-5 w1 animated fadeIn fast">
+  <div class="row two-column">
+
+    <!--Centro Post-->
+    <div class="core-rail pv-profile-wrapper">
+
+      <!--profile Background-->
+      <div class="Elevation-2dp profile-background-image">
+
+        <div class="profile-background-image__image-container">
+          <img *ngIf="profiler.profileBackground" [src]="'../../../assets/img/' + profiler.profileBackground"
+               class="relative full-width full-height">
+        </div>
+
+      </div>
+
+      <!--profile-->
+      <div class="pv-profile-section artdeco-container-card pv-top-card-section Elevation-2dp">
+
+        <!--Foto-->
+        <div class="pv-top-card-section__profile-photo-container pv-top-card-v2-section__profile-photo-container">
+          <div class="pv-top-card-section__photo-wrapper pv-top-card-v2-section__photo-wrapper">
+
+            <div class="pv-top-card-section__edit-photo pv-top-card-v2-section__edit-photo profile-photo-edit">
+
+              <div class="profile-photo-edit__edit-btn">
+
+                <img *ngIf="profiler.profilePhoto" [src]="'../../../assets/img/' + profiler.profilePhoto" class="profile-photo-edit__preview">
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        <div class="mt4 d-flex">
+          <div class="mr5">
+
+            <div>
+              <h1 class="pv-top-card-section__name inline t-24 t-black t-normal" [innerText]="profiler.name || ''"></h1>
+            </div>
+
+            <h2 class="pv-top-card-section__headline mt1 t-18 t-black t-normal" [innerText]="profiler.title || ''"></h2>
+
+            <h3 class="pv-top-card-section__location t-16 t-black--light t-normal mt1 inline-block" [innerText]="profiler.location || ''"></h3>
+
+          </div>
+
+        </div>
+
+        <!--Bio-->
+        <div class="pv-top-card-section__summary pv-top-card-section__summary--with-content mt4 collapse-block" [innerHTML]="profiler.bio || '' | safeHtml"></div>
+        <button class="pv-top-card-section__summary-toggle-button pv-profile-section__card-action-bar artdeco-container-card-action-bar mt4 p mas" appExpandCollapseBlock></button>
+
+      </div>
+
+      <!--Experiencia y educación-->
+      <div class="pv-profile-section pv-profile-section--reorder-enabled background-section artdeco-container-card Elevation-2dp" *ngIf="profiler.experienceEducation">
+
+        <div class="collapse-block" [innerHTML]="profiler.experienceEducation || '' | safeHtml"></div>
+        <button class="pv-top-card-section__summary-toggle-button pv-profile-section__card-action-bar artdeco-container-card-action-bar mt4 mas" appExpandCollapseBlock></button>
+
+      </div>
+
+      <div class="pv-profile-section pv-skill-categories-section__expanded Elevation-2dp">
+
+        <div class="collapse-block" [innerHTML]="profiler.skill || '' | safeHtml">
+
+        </div>
+
+        <button class="pv-top-card-section__summary-toggle-button pv-profile-section__card-action-bar artdeco-container-card-action-bar mt4 mas" appExpandCollapseBlock></button>
+
+      </div>
+
+    </div>
+
+    <!--Sidebar Derecho-->
+    <div class="right-rail">
+
+      <div class="right-rail-container right-rail-card" data-sticky-margin-top="12" data-sticky-top="54">
+
+        Saludos de nuevo.
+        <br><br>
+
+        <p>Los botones  <strong>Mostrar más</strong>  funcionan colapsan y expanden el contenido, sé que lo ideal es tener dos versiones del contenido para esto,
+        una la reducida y la completa, bien se sabe que se carga la versión reducida y si se quiere la completa pues se obtiene y se renderiza
+        no lo hice así por cuestión  de tiempo.</p>
+        <br><br>
+        <p>Le invito a colocar otro nombre de perfil por ejemplo <strong>in/otro</strong></p>
+        <p>Esto generara un error será redirigido a una paina especial</p>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
