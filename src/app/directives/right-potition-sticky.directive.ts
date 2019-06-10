@@ -1,4 +1,6 @@
-import { Directive, ElementRef, Renderer2, HostListener } from '@angular/core';
+import { Directive, ElementRef, Renderer2, HostListener, PLATFORM_ID, Inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { UtilitesService } from '../services/utilites.service';
 
 // Para emular la position Sticky
 @Directive({
@@ -10,7 +12,7 @@ export class RightPotitionStickyDirective {
   private top: number;
   private marginTop: number;
 
-  constructor(private ele: ElementRef, private renderer: Renderer2) {
+  constructor(private ele: ElementRef, private renderer: Renderer2, private utilitesService: UtilitesService) {
 
     const element = ele.nativeElement;
 
@@ -22,20 +24,24 @@ export class RightPotitionStickyDirective {
     element.removeAttribute('data-sticky-top');
     element.removeAttribute('data-sticky-margin-top');
 
-    this.goSticky()
+    this.goSticky();
 
   }
 
   private goSticky() {
 
-    // Me cae mal el Edge pero que se le hace
-    const currentScroll = document.documentElement.scrollTop || window.document.body.scrollTop;
+    if(this.utilitesService.isPlatformBrowser()) {
 
-    // Se agrega la class fixed-right-card al elemento
-    currentScroll + this.marginTop  > this.top && this.fixedState || (this.renderer.addClass(this.ele.nativeElement, 'fixed-right-card'), this.fixedState = true);
+      // Me cae mal el Edge pero que se le hace
+      const currentScroll = document.documentElement.scrollTop || window.document.body.scrollTop;
 
-    // Se quita la class fixed-right-card al elemento
-    currentScroll <= this.top && this.fixedState && (this.renderer.removeClass(this.ele.nativeElement, 'fixed-right-card'), this.fixedState = false);
+      // Se agrega la class fixed-right-card al elemento
+      currentScroll + this.marginTop > this.top && this.fixedState || (this.renderer.addClass(this.ele.nativeElement, 'fixed-right-card'), this.fixedState = true);
+
+      // Se quita la class fixed-right-card al elemento
+      currentScroll <= this.top && this.fixedState && (this.renderer.removeClass(this.ele.nativeElement, 'fixed-right-card'), this.fixedState = false);
+
+    }
 
   }
 

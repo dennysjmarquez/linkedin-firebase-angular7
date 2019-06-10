@@ -5,6 +5,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+// SSR
+import { PLATFORM_ID, APP_ID, Inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+
 // Idioma Español
 
 import { LOCALE_ID } from '@angular/core';
@@ -40,7 +44,9 @@ import { SafeHtmlPipe } from './pipes/safe-html.pipe';
     SafeHtmlPipe
   ],
   imports: [
-    BrowserModule,
+    // BrowserModule,
+    // SSR
+    BrowserModule.withServerTransition({ appId: 'pruebaangular' }),
     AppRoutingModule,
     HttpClientModule,
     FormsModule
@@ -49,4 +55,17 @@ import { SafeHtmlPipe } from './pipes/safe-html.pipe';
   bootstrap: [AppComponent]
 })
 
-export class AppModule { }
+// export class AppModule { }
+// SSR
+export class AppModule {
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, @Inject(APP_ID) private appId: string) {
+
+    const platform = isPlatformBrowser(platformId)
+      ? 'in the browser'
+      : 'on the server';
+
+    console.log(`Running ${platform} with appId=${appId}`);
+
+  }
+}

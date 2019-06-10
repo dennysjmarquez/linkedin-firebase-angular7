@@ -11,18 +11,18 @@ export class ExpandCollapseBlockDirective {
 
   @HostListener('click') click() {
 
-    const ele: ElementRef = this.ele.nativeElement;
-    const collapseEle =  this.ele.nativeElement.previousSibling;
+    const ele = this.renderer.selectRootElement(this.ele.nativeElement),
+      collapseEle =  this.renderer.selectRootElement(this.ele.nativeElement).previousSibling;
 
     if(collapseEle.classList.contains(this.className)){
 
-      collapseEle.classList.remove(this.className);
+      this.renderer.removeClass(collapseEle,this.className);
       this.renderer.removeClass(ele,'mas');
       this.renderer.addClass(ele,'menos');
 
     }else{
 
-      collapseEle.classList.add(this.className);
+      this.renderer.addClass(collapseEle,this.className);
       this.renderer.removeClass(ele,'menos');
       this.renderer.addClass(ele,'mas');
 

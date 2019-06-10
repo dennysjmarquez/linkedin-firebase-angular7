@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
+import {Inject, Injectable, PLATFORM_ID} from '@angular/core';
 import { Post } from '../interfaces/post';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Profiler } from '../interfaces/profiler';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,13 @@ export class UtilitesService {
   user: Profiler;
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, @Inject(PLATFORM_ID) private platformId: any) { }
+
+  isPlatformBrowser(){
+
+    return isPlatformBrowser(this.platformId);
+
+  }
 
   getProfiler(name: string): Observable<any> {
 
@@ -50,7 +57,18 @@ export class UtilitesService {
   showErr(msg: string){
 
     this.loader = false;
-    alert(msg);
+
+    if(this.isPlatformBrowser()){
+
+      alert(msg);
+
+    }else{
+
+      console.log(msg);
+
+    }
+
+
 
   }
 

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, DoCheck, AfterContentInit,
+  AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router} from '@angular/router';
 import { UtilitesService } from '../../services/utilites.service';
 import { Title } from '@angular/platform-browser';
@@ -11,33 +12,34 @@ import { Title } from '@angular/platform-browser';
 export class ProfilerComponent implements OnInit {
 
   profiler: any = {};
+  getData = true;
 
   constructor(private title: Title, private activatedRoute: ActivatedRoute, private utilitesService: UtilitesService, private router: Router) {
 
-    this.activatedRoute.params.subscribe((data: any) => {
+    this.getData && this.activatedRoute.params.subscribe((data: any) => {
 
-      setTimeout(() => {
+        setTimeout(() => {
 
-        this.utilitesService.getProfiler(data.id).subscribe((data: any) => {
+          this.utilitesService.getProfiler(data.id).subscribe((data: any) => {
 
-          this.utilitesService.loader = false;
+            this.utilitesService.loader = false;
 
-          if (data) {
+            if (data) {
 
-            this.profiler = data.profiler;
-            title.setTitle(this.profiler.name);
+              this.profiler = data.profiler;
+              title.setTitle(this.profiler.name);
 
-          } else {
+            } else {
 
-            this.router.navigate(['/in', 'unavailable']);
+              this.router.navigate(['/in', 'unavailable']);
 
-          }
+            }
 
-        }, err => this.utilitesService.showErr(`${err.name} ${err.status} ${err.statusText}`));
+          }, err => this.utilitesService.showErr(`${err.name} ${err.status} ${err.statusText}`));
 
-      }, 100);
+        }, 100);
 
-    });
+      });
 
   }
 
